@@ -6,4 +6,6 @@ import pl.sda.projects.adverts.model.domain.User;
 public interface UserRepository extends JpaRepository<User, Long> {
 
     boolean existsByUsername(String username);
+
+    User getByUsername(String username);
 }

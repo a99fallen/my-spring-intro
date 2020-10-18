@@ -1,18 +1,16 @@
 package pl.sda.projects.adverts.model.domain;
 
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 import org.hibernate.annotations.ColumnDefault;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
-import java.util.Objects;
+import java.time.format.DateTimeFormatter;
 
 @Entity
 @Table(name = "adverts")
 @Getter @Setter @ToString (exclude = "user") @EqualsAndHashCode(of = "id")
+@Builder @NoArgsConstructor @AllArgsConstructor
 public class Advert {
 
     @Id
@@ -34,6 +32,9 @@ public class Advert {
     private User user;
 
     @Column(name = "user_id", insertable = false, updatable = false)
-    private Long UserId;
+    private Long userId;
 
+    public String getPostedFormatted() {
+        return posted.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
+    }
 }
